@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row"> <!--La fila-->
+    
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!-- Columna Izquierda-->
+        <h1>Producto</h1>
+
+        <div class="card"> <!-- La tarjeta -->
+            <div class="card-body">
+                <form action="registrarMascota/" method="POST"> {% csrf_token %} <!-- Falta action -->
+                    <div class="form-group">
+                        <input type="text" id="txtcodigo" name="txtcodigo" class="form-control" placeholder="Codigo Mascota" minlength="1" maxlength="6" required>
+                    </div>
+
+                    <div class="form-group py-3">
+                            <input type="text" id="txtespecie" name="txtespecie" class="form-control" placeholder="Especie Mascota" maxlength="100" required>
+                        </div>
+
+                        <div class="form-group py-3">
+                            <input type="text" id="txttamaño" name="txttamaño" class= "form-control" placeholder=" Tamaño Mascota" maxlength="100" required>
+                        </div>
+
+                        <div class="form-group py-3">
+                            <input type="text" id="txtprecio" name="txtprecio" class="form-control" placeholder="Precio Mascota" maxlength="100" required>
+                        </div>
+
+                        <div class="form-group py-3">
+                            <input type="text" id="txtdieta" name="txtdieta" class="form-control" placeholder="Dieta Mascota" maxlength="100" required>
+                        </div>
+
+                        <div class="form-group py-3">
+                            <input type="text" id="txttemperamento" name="txttemperamento" class="form-control" placeholder="Temperamento Mascota" maxlength="100" required>
+                        </div>
+
+                        <div class="form-group py-3">
+                            <input type="text" id="txtcuidados" name="txtcuidados" class="form-control" placeholder="Cuidados Mascota" maxlength="100" required>
+                        </div>
+                    
+                        <div class="form-group py-3">
+                            <input type="text" id="txtedad" name="txtedad" class="form-control" placeholder="Edad Mascota" maxlength="100" required>
+                        </div>
+
+                    <div class="form-group py-1">
+                        <button type="submit" class="btn btn-dark">Guardar Mascota</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- La tarjeta -->
+
+    </div> <!-- Columna Izquierda-->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!-- Columna derecha -->
+        <h1>Listado de Mascotas</h1>
+        <!-- La tabla -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Código</th>
+                    <th scope="col">Especie</th>
+                    <th scope="col">Tamaño</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Dieta</th>
+                    <th scope="col">Temperamento</th>
+                    <th scope="col">Cuidados</th>
+                    <th scope="col">Edad</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in mismascotas %}
+                    <tr>
+                        <td> {{forloop.counter}} </td>
+                        <td> {{m.codigo}} </td>
+                        <td> {{m.especie}} </td>
+                        <td> {{m.tamaño}} </td>
+                        <td> {{m.precio}} </td>
+                        <td> {{m.dieta}} </td>
+                        <td> {{m.temperamento}} </td>
+                        <td> {{m.cuidados}} </td>
+                        <td> {{m.edad}} </td>
+                        <td><a href="seleccionarMascota/{{m.codigo}}" class="btn btn-secondary">Editar</a></td> <!-- Falta -->
+                        <td><a href="borrarMascota/{{m.codigo}}" class="btn btn-dark">Borrar</a></td> 
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+    <!-- La tabla -->
+    </div> <!-- Columna derecha -->
+
+</div> <!--La fila-->
+{% endblock %}

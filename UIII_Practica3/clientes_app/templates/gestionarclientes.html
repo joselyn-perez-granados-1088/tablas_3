@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row"> <!--La fila-->
+    
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!-- Columna Izquierda-->
+        <h1>Cliente</h1>
+
+        <div class="card"> <!-- La tarjeta -->
+            <div class="card-body">
+                <form action="registrarCliente/" method="POST"> {% csrf_token %} <!-- Falta action -->
+                    <div class="form-group">
+                        <input type="text" id="txtcodigo" name="txtcodigo" class="form-control" placeholder="Codigo Mascota" minlength="1" maxlength="6" required>
+                    </div>
+
+                    <div class="form-group py-3">
+                            <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre Cliente" maxlength="100" required>
+                        </div>
+
+                        <div class="form-group py-3">
+                            <input type="text" id="txtnumero" name="txtnumero" class= "form-control" placeholder=" Numero Cliente" maxlength="100" required>
+                        </div>
+
+                        <div class="form-group py-3">
+                            <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" placeholder="Direccion Cliente" maxlength="100" required>
+                        </div>
+
+                        <div class="form-group py-3">
+                            <input type="text" id="txtinteres" name="txtinteres" class="form-control" placeholder="Interes Cliente" maxlength="100" required>
+                        </div>
+
+                        <div class="form-group py-3">
+                            <input type="text" id="txthistorial" name="txthistorial" class="form-control" placeholder="Historial Cliente" maxlength="100" required>
+                        </div>
+
+                        <div class="form-group py-3">
+                            <input type="text" id="txtemail" name="txtemail" class="form-control" placeholder="Email Cliente" maxlength="100" required>
+                        </div>
+
+                    <div class="form-group py-1">
+                        <button type="submit" class="btn btn-dark">Guardar Cliente</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- La tarjeta -->
+
+    </div> <!-- Columna Izquierda-->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!-- Columna derecha -->
+        <h1>Listado de Clientes</h1>
+        <!-- La tabla -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Código</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Numero</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Interes</th>
+                    <th scope="col">Historial</th>
+                    <th scope="col">Email</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in mismascotas %}
+                    <tr>
+                        <td> {{forloop.counter}} </td>
+                        <td> {{m.codigo}} </td>
+                        <td> {{m.nombre}} </td>
+                        <td> {{m.numero}} </td>
+                        <td> {{m.direccion}} </td>
+                        <td> {{m.interes}} </td>
+                        <td> {{m.historial}} </td>
+                        <td> {{m.email}} </td>
+                        <td><a href="seleccionarCliente/{{m.codigo}}" class="btn btn-secondary">Editar</a></td> <!-- Falta -->
+                        <td><a href="borrarCliente/{{m.codigo}}" class="btn btn-dark">Borrar</a></td> 
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+    <!-- La tabla -->
+    </div> <!-- Columna derecha -->
+
+</div> <!--La fila-->
+{% endblock %}
